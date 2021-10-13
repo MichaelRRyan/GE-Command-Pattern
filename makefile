@@ -1,9 +1,9 @@
-CXX			:= gcc
+CXX			:= g++
 
 SDL_CFLAGS := $(shell sdl2-config --cflags)
-SDL_LDFLAGS := $(shell sdl2-config --libs)
+SDL_LDFLAGS := $(shell sdl2-config --libs) -lSDL2_image -lSDL2_ttf
 
-CXXFLAGS 	:= -Wall -Wextra -Werror -g -I. ${SDL_CFLAGS} ${SDL_LDFLAGS}
+CXXFLAGS 	:= -I. -I./include ${SDL_CFLAGS} ${SDL_LDFLAGS}
 
 MSG_START	:= "Build Started"
 MSG_END		:= "Build Complete"
@@ -12,7 +12,7 @@ MSG_CLEAN	:= "Cleaning up"
 BUILD_DIR	:= ./bin
 SRC_DIR		:= ./src
 
-TARGET		:= ${BUILD_DIR}/app.bin
+TARGET		:= ${BUILD_DIR}/app
 
 SRC			:= ${SRC_DIR}/*.cpp
 
@@ -31,10 +31,4 @@ build:
 
 	${CXX} -o ${TARGET} ${SRC} ${CXXFLAGS}
 	@echo ${MSG_END}
-	./${TARGET}
-
-.PHONY: clean
-
-clean:
-	@echo ${MSG_CLEAN}
-	rm -rf ${BUILD_DIR} || true
+	${TARGET}
