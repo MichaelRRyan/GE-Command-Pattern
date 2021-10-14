@@ -5,6 +5,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <string>
+#include "Command.h"
 
 class Button
 {
@@ -13,6 +14,10 @@ public:
     Button(SDL_Renderer* t_renderer, TTF_Font* t_font, std::string t_name, float t_x, float t_y);
     virtual ~Button();
     virtual void draw();
+
+    void processEvents(SDL_Event & t_event);
+
+    void setCommand(Command * t_command);
 
 protected:
 
@@ -35,6 +40,8 @@ private:
 
     void setupBackground();
     void setupText();
+
+    Command * m_command;
 
 };
 

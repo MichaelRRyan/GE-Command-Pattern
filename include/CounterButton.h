@@ -11,12 +11,17 @@ public:
     virtual ~CounterButton() override;
     virtual void draw() override;
 
+    void incrementCounter();
+    void decrementCounter();
+
 private:
 
     void setupCounterText(int t_count);
 
     SDL_Texture * m_counterText;
     SDL_Rect m_counterTextRect;
+
+    int m_count;
 
 };
 

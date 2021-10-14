@@ -5,6 +5,7 @@
 #include <vector>
 #include "Button.h"
 #include "CounterButton.h"
+#include "AddMaterialCommand.h"
 
 const int SCREEN_WIDTH = 980;
 const int SCREEN_HEIGHT = 600;

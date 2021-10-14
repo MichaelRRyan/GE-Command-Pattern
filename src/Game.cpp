@@ -24,9 +24,20 @@ Game::Game() :
     if (m_font == nullptr)
         printf("Open Font Error::SDL_Error: %s\n", SDL_GetError());
 
-    m_buttons.push_back(new CounterButton(m_renderer, m_font, "Lego brick", 20.0f, 20.0f));
-    m_buttons.push_back(new CounterButton(m_renderer, m_font, "Mud brick", 340.0f, 20.0f));
-    m_buttons.push_back(new CounterButton(m_renderer, m_font, "Clay brick", 660.0f, 20.0f));
+    CounterButton * btn = new CounterButton(m_renderer, m_font, "Lego brick", 20.0f, 20.0f);
+    m_buttons.push_back(btn);
+    AddMaterialCommand * cmd = new AddMaterialCommand(btn);
+    btn->setCommand(cmd);
+
+    btn = new CounterButton(m_renderer, m_font, "Mud brick", 340.0f, 20.0f);
+    m_buttons.push_back(btn);
+    cmd = new AddMaterialCommand(btn);
+    btn->setCommand(cmd);
+
+    btn = new CounterButton(m_renderer, m_font, "Clay brick", 660.0f, 20.0f);
+    m_buttons.push_back(btn);
+    cmd = new AddMaterialCommand(btn);
+    btn->setCommand(cmd);
 
     m_buttons.push_back(new Button(m_renderer, m_font, "Undo", 20.0f, 380.0f));
     m_buttons.push_back(new Button(m_renderer, m_font, "Build", 340.0f, 380.0f));
@@ -59,6 +70,9 @@ void Game::processEvents()
         {
             m_isRunning = false;
         }
+
+        for (Button * button : m_buttons)
+            button->processEvents(e);
     }
 }
 

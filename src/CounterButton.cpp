@@ -1,9 +1,10 @@
 #include "CounterButton.h"
 
 CounterButton::CounterButton(SDL_Renderer* t_renderer, TTF_Font* t_font, std::string t_name, float t_x, float t_y) :
-    Button(t_renderer, t_font, t_name, t_x, t_y)
+    Button(t_renderer, t_font, t_name, t_x, t_y),
+    m_count{ 0 }
 {
-    setupCounterText(0);
+    setupCounterText(m_count);
 }
 
 CounterButton::~CounterButton()
@@ -16,6 +17,18 @@ void CounterButton::draw()
     SDL_RenderCopy(m_renderer, m_background, NULL, &m_backgroundRect);
     SDL_RenderCopy(m_renderer, m_text, NULL, &m_textRect);
     SDL_RenderCopy(m_renderer, m_counterText, NULL, &m_counterTextRect);
+}
+
+void CounterButton::incrementCounter()
+{
+    m_count++;
+    setupCounterText(m_count);
+}
+
+void CounterButton::decrementCounter()
+{
+    m_count--;
+    setupCounterText(m_count);
 }
 
 void CounterButton::setupCounterText(int t_count)

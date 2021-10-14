@@ -1,4 +1,5 @@
 #include "Button.h"
+#include <iostream>
 
 Button::Button(SDL_Renderer* t_renderer, TTF_Font* t_font, std::string t_name, float t_x, float t_y) :
     m_renderer(t_renderer),
@@ -14,12 +15,33 @@ Button::Button(SDL_Renderer* t_renderer, TTF_Font* t_font, std::string t_name, f
 Button::~Button()
 {
     SDL_DestroyTexture(m_background);
+    
+    if (m_command != nullptr)
+        delete m_command;
 }
 
 void Button::draw()
 {
     SDL_RenderCopy(m_renderer, m_background, NULL, &m_backgroundRect);
     SDL_RenderCopy(m_renderer, m_text, NULL, &m_textRect);
+}
+
+void Button::processEvents(SDL_Event & t_event)
+{
+    if (t_event.type == SDL_MOUSEBUTTONDOWN)
+    {
+        if (t_event.button.x > m_x && t_event.button.x < m_x + m_backgroundRect.w
+            && t_event.button.y > m_y && t_event.button.y < m_y + m_backgroundRect.h)
+        {
+            if (m_command != nullptr)
+                m_command->execute();
+        }
+    }
+}
+
+void Button::setCommand(Command * t_command)
+{
+    m_command = t_command;
 }
 
 void Button::setupBackground()
