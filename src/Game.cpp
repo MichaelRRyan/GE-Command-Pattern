@@ -18,8 +18,13 @@ Game::Game() :
 
     if (m_renderer == nullptr)
         printf("Renderer Creation Error::SDL_Error: %s\n", SDL_GetError());
+    
+    m_font = TTF_OpenFont("assets/Gwibble.ttf", 32);
 
-    m_button = new Button(m_renderer, m_font, "Lego brick", 100.0f, 100.0f);
+    if (m_font == nullptr)
+        printf("Open Font Error::SDL_Error: %s\n", SDL_GetError());
+
+    m_button = new Button(m_renderer, m_font, "Lego brick", 20.0f, 20.0f);
 }
 
 Game::~Game()
