@@ -24,7 +24,13 @@ Game::Game() :
     if (m_font == nullptr)
         printf("Open Font Error::SDL_Error: %s\n", SDL_GetError());
 
-    m_button = new Button(m_renderer, m_font, "Lego brick", 20.0f, 20.0f);
+    m_buttons.push_back(new Button(m_renderer, m_font, "Lego brick", 20.0f, 20.0f));
+    m_buttons.push_back(new Button(m_renderer, m_font, "Mud brick", 340.0f, 20.0f));
+    m_buttons.push_back(new Button(m_renderer, m_font, "Clay brick", 660.0f, 20.0f));
+
+    m_buttons.push_back(new Button(m_renderer, m_font, "Undo", 20.0f, 380.0f));
+    m_buttons.push_back(new Button(m_renderer, m_font, "Build", 340.0f, 380.0f));
+    m_buttons.push_back(new Button(m_renderer, m_font, "Redo", 660.0f, 380.0f));
 }
 
 Game::~Game()
@@ -66,7 +72,8 @@ void Game::render()
     SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
     SDL_RenderClear(m_renderer);
 
-    m_button->draw();
+    for (Button * button : m_buttons)
+        button->draw();
 
     SDL_RenderPresent(m_renderer);
 }

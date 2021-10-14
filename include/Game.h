@@ -2,9 +2,10 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
+#include <vector>
 #include "Button.h"
 
-const int SCREEN_WIDTH = 800;
+const int SCREEN_WIDTH = 980;
 const int SCREEN_HEIGHT = 600;
 
 class Game
@@ -25,7 +26,7 @@ private:
 
     bool m_isRunning;
 
-    Button * m_button;
+    std::vector<Button *> m_buttons;
 
     TTF_Font* m_font;
 
