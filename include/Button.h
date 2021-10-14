@@ -11,13 +11,10 @@ class Button
 public:
 
     Button(SDL_Renderer* t_renderer, TTF_Font* t_font, std::string t_name, float t_x, float t_y);
-    ~Button();
-    void draw();
+    virtual ~Button();
+    virtual void draw();
 
-private:
-
-    void setupBackground();
-    void setupText();
+protected:
 
     std::string m_name;
 
@@ -33,6 +30,11 @@ private:
 
     SDL_Rect m_backgroundRect;
     SDL_Rect m_textRect;
+
+private:
+
+    void setupBackground();
+    void setupText();
 
 };
 
