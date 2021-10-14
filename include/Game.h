@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "CounterButton.h"
 #include "AddMaterialCommand.h"
+#include "UndoCommand.h"
 
 const int SCREEN_WIDTH = 980;
 const int SCREEN_HEIGHT = 600;
@@ -36,6 +37,9 @@ private:
 	SDL_Window* m_window = NULL;
 	
 	SDL_Renderer* m_renderer;
+
+    std::vector<Command *> m_performedCommands;
+    std::vector<Command *> m_undoneCommands;
 
 };
 

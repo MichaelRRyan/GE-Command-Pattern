@@ -26,22 +26,28 @@ Game::Game() :
 
     CounterButton * btn = new CounterButton(m_renderer, m_font, "Lego brick", 20.0f, 20.0f);
     m_buttons.push_back(btn);
-    AddMaterialCommand * cmd = new AddMaterialCommand(btn);
+    Command * cmd = new AddMaterialCommand(btn, m_performedCommands);
     btn->setCommand(cmd);
 
     btn = new CounterButton(m_renderer, m_font, "Mud brick", 340.0f, 20.0f);
     m_buttons.push_back(btn);
-    cmd = new AddMaterialCommand(btn);
+    cmd = new AddMaterialCommand(btn, m_performedCommands);
     btn->setCommand(cmd);
 
     btn = new CounterButton(m_renderer, m_font, "Clay brick", 660.0f, 20.0f);
     m_buttons.push_back(btn);
-    cmd = new AddMaterialCommand(btn);
+    cmd = new AddMaterialCommand(btn, m_performedCommands);
     btn->setCommand(cmd);
 
     m_buttons.push_back(new Button(m_renderer, m_font, "Undo", 20.0f, 380.0f));
+    cmd = new UndoCommand(m_performedCommands, m_undoneCommands);
+    m_buttons.back()->setCommand(cmd);
+
     m_buttons.push_back(new Button(m_renderer, m_font, "Build", 340.0f, 380.0f));
+
     m_buttons.push_back(new Button(m_renderer, m_font, "Redo", 660.0f, 380.0f));
+    cmd = new UndoCommand(m_undoneCommands, m_performedCommands);
+    m_buttons.back()->setCommand(cmd);
 }
 
 Game::~Game()
