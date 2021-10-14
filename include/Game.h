@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
+#include "Button.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -24,11 +25,14 @@ private:
 
     bool m_isRunning;
 
+    Button * m_button;
+
+    TTF_Font* m_font;
+
     //Render Window
-	SDL_Window* window = NULL;
+	SDL_Window* m_window = NULL;
 	
-	//Frame or Surface to Render to
-	SDL_Surface* frame = NULL;
+	SDL_Renderer* m_renderer;
 
 };
 

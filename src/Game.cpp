@@ -3,25 +3,23 @@
 Game::Game() : 
     m_isRunning{ false }
 {
-    //Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-	{
-		printf( "Initialization Error::SDL_Error: %s\n", SDL_GetError() );
-	}
-	else
-	{
-		//Create window
-		window = SDL_CreateWindow("Render Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( window == NULL )
-		{
-			printf( "Window Creation Error::SDL_Error: %s\n", SDL_GetError() );
-		}
-		else
-		{
-			//Get Window Frame to Render to
-			frame = SDL_GetWindowSurface( window );
-		}
-	}
+    SDL_Init(SDL_INIT_EVERYTHING);
+    IMG_Init(IMG_INIT_PNG);
+    TTF_Init();
+
+    
+    //Create window
+    m_window = SDL_CreateWindow("Render Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    
+    if (m_window == nullptr)
+        printf("Window Creation Error::SDL_Error: %s\n", SDL_GetError());
+    
+    m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
+
+    if (m_renderer == nullptr)
+        printf("Renderer Creation Error::SDL_Error: %s\n", SDL_GetError());
+
+    m_button = new Button(m_renderer, m_font, "Lego brick", 100.0f, 100.0f);
 }
 
 Game::~Game()
@@ -60,17 +58,18 @@ void Game::update()
 
 void Game::render()
 {
-    //Fill the Frame with Red
-    SDL_FillRect( frame, NULL, SDL_MapRGB( frame->format, 0xFF, 0x00, 0x00 ) );
-    
-    //Update the surface
-    SDL_UpdateWindowSurface( window );
+    SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+    SDL_RenderClear(m_renderer);
+
+    m_button->draw();
+
+    SDL_RenderPresent(m_renderer);
 }
 
 void Game::cleanUp()
 {
     //Destroy window
-	SDL_DestroyWindow( window );
+	SDL_DestroyWindow( m_window );
 
 	//Quit SDL subsystems
 	SDL_Quit();
