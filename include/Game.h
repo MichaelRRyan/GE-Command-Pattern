@@ -8,7 +8,11 @@
 #include "AddMaterialCommand.h"
 #include "UndoCommand.h"
 #include "RedoCommand.h"
+#include "BuildCommand.h"
 #include "CommandHistory.h"
+#include "brick/ClayBrickFactory.h"
+#include "brick/MudBrickFactory.h"
+#include "brick/LegoBrickFactory.h"
 
 const int SCREEN_WIDTH = 980;
 const int SCREEN_HEIGHT = 600;
@@ -42,6 +46,7 @@ private:
 	SDL_Renderer* m_renderer;
 
     CommandHistory m_commandHistory;
+    std::vector<BrickFactory *> m_factoryOrders; 
 
 };
 
