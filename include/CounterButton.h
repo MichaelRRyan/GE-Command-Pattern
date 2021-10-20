@@ -14,6 +14,13 @@ public:
     void incrementCounter();
     void decrementCounter();
 
+protected:
+
+    virtual void onHovered() override;
+    virtual void onUnhovered() override;
+    virtual void onClicked() override;
+    virtual void onUnclicked() override;
+
 private:
 
     void setupCounterText(int t_count);

@@ -125,6 +125,11 @@ void Button::onHovered()
     m_backgroundRect.h += m_hoveredSizeChange;
     m_backgroundRect.x -= m_hoveredSizeChange / 2.0f;
     m_backgroundRect.y -= m_hoveredSizeChange / 2.0f;
+
+    m_textRect.w += m_hoveredSizeChange;
+    m_textRect.h += m_hoveredSizeChange;
+    m_textRect.x -= m_hoveredSizeChange / 2.0f;
+    m_textRect.y -= m_hoveredSizeChange / 2.0f;
 }
 
 void Button::onUnhovered()
@@ -134,6 +139,11 @@ void Button::onUnhovered()
     m_backgroundRect.h -= m_hoveredSizeChange;
     m_backgroundRect.x += m_hoveredSizeChange / 2.0f;
     m_backgroundRect.y += m_hoveredSizeChange / 2.0f;
+
+    m_textRect.w -= m_hoveredSizeChange;
+    m_textRect.h -= m_hoveredSizeChange;
+    m_textRect.x += m_hoveredSizeChange / 2.0f;
+    m_textRect.y += m_hoveredSizeChange / 2.0f;
 }
 
 void Button::onClicked()
@@ -143,6 +153,11 @@ void Button::onClicked()
     m_backgroundRect.h -= m_clickedSizeChange;
     m_backgroundRect.x += m_clickedSizeChange / 2.0f;
     m_backgroundRect.y += m_clickedSizeChange / 2.0f;
+
+    m_textRect.w -= m_clickedSizeChange;
+    m_textRect.h -= m_clickedSizeChange;
+    m_textRect.x += m_clickedSizeChange / 2.0f;
+    m_textRect.y += m_clickedSizeChange / 2.0f;
 }
 
 void Button::onUnclicked()
@@ -152,4 +167,9 @@ void Button::onUnclicked()
     m_backgroundRect.h += m_clickedSizeChange;
     m_backgroundRect.x -= m_clickedSizeChange / 2.0f;
     m_backgroundRect.y -= m_clickedSizeChange / 2.0f;
+
+    m_textRect.w += m_clickedSizeChange;
+    m_textRect.h += m_clickedSizeChange;
+    m_textRect.x -= m_clickedSizeChange / 2.0f;
+    m_textRect.y -= m_clickedSizeChange / 2.0f;
 }

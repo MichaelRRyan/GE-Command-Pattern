@@ -49,3 +49,43 @@ void CounterButton::setupCounterText(int t_count)
     if (m_counterText == nullptr)
         printf("Text loading error::SDL_Error: %s\n", SDL_GetError());
 }
+
+void CounterButton::onHovered()
+{
+    Button::onHovered();
+
+    m_counterTextRect.w += m_hoveredSizeChange;
+    m_counterTextRect.h += m_hoveredSizeChange;
+    m_counterTextRect.x -= m_hoveredSizeChange / 2.0f;
+    m_counterTextRect.y -= m_hoveredSizeChange / 2.0f;
+}
+
+void CounterButton::onUnhovered()
+{
+    Button::onUnhovered();
+
+    m_counterTextRect.w -= m_hoveredSizeChange;
+    m_counterTextRect.h -= m_hoveredSizeChange;
+    m_counterTextRect.x += m_hoveredSizeChange / 2.0f;
+    m_counterTextRect.y += m_hoveredSizeChange / 2.0f;
+}
+
+void CounterButton::onClicked()
+{
+    Button::onClicked();
+
+    m_counterTextRect.w -= m_clickedSizeChange;
+    m_counterTextRect.h -= m_clickedSizeChange;
+    m_counterTextRect.x += m_clickedSizeChange / 2.0f;
+    m_counterTextRect.y += m_clickedSizeChange / 2.0f;
+}
+
+void CounterButton::onUnclicked()
+{
+    Button::onUnclicked();
+
+    m_counterTextRect.w += m_clickedSizeChange;
+    m_counterTextRect.h += m_clickedSizeChange;
+    m_counterTextRect.x -= m_clickedSizeChange / 2.0f;
+    m_counterTextRect.y -= m_clickedSizeChange / 2.0f;
+}
