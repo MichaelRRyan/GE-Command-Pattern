@@ -8,7 +8,7 @@ class ClayBrick : public Brick
 {
 public:
     ClayBrick() { }
-    void render() { std::cout << "Drawing a Clay Brick at location" << this << std::endl; }
+    void render() { std::cout << "Plonk! - Clay Brick @" << this << std::endl; }
 };
 
 #endif // !CLAY_BRICK_H

@@ -16,7 +16,7 @@ public:
         std::vector<Brick *> bricks;
 
         std::cout << "Building " << t_numberOfBricks 
-            << " mud brick(s) from the factory at location " << this << std::endl;
+            << " mud brick(s) from the factory @ " << this << std::endl;
 
         for (int i = 0; i < t_numberOfBricks; i++)
             bricks.push_back(new MudBrick());
