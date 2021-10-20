@@ -6,7 +6,11 @@ Button::Button(SDL_Renderer* t_renderer, TTF_Font* t_font, std::string t_name, f
     m_font(t_font),
     m_name(t_name),
     m_x(t_x),
-    m_y(t_y)
+    m_y(t_y),
+    m_hovered{ false },
+    m_clicked{ false },
+    m_hoveredSizeChange{ 6.0f },
+    m_clickedSizeChange{ 10.0f }
 {
     setupBackground();
     setupText();
@@ -28,14 +32,39 @@ void Button::draw()
 
 void Button::processEvents(SDL_Event & t_event)
 {
-    if (t_event.type == SDL_MOUSEBUTTONDOWN)
+    switch (t_event.type)
     {
-        if (t_event.button.x > m_x && t_event.button.x < m_x + m_backgroundRect.w
-            && t_event.button.y > m_y && t_event.button.y < m_y + m_backgroundRect.h)
+    case SDL_MOUSEBUTTONDOWN:
+        if (contains(t_event.button.x, t_event.button.y))
         {
             if (m_command != nullptr)
                 m_command->execute();
+            
+            if (!m_clicked)
+                onClicked();
         }
+        break;
+    case SDL_MOUSEBUTTONUP:
+        if (contains(t_event.button.x, t_event.button.y))
+        {
+            if (m_clicked)
+                onUnclicked();
+        }
+        break;
+    case SDL_MOUSEMOTION:
+        if (contains(t_event.button.x, t_event.button.y))
+        {
+            if (!m_hovered)
+                onHovered();
+        }
+        else
+        {
+            if (m_hovered)
+                onUnhovered();
+            if (m_clicked)
+                onUnclicked();
+        }
+        break;
     }
 }
 
@@ -81,4 +110,46 @@ void Button::setupText()
 
     if (m_text == nullptr)
         printf("Text loading error::SDL_Error: %s\n", SDL_GetError());
+}
+
+bool Button::contains(float t_x, float t_y)
+{
+    return t_x > m_x && t_x < m_x + m_backgroundRect.w
+        && t_y > m_y && t_y < m_y + m_backgroundRect.h;
+}
+
+void Button::onHovered()
+{
+    m_hovered = true;
+    m_backgroundRect.w += m_hoveredSizeChange;
+    m_backgroundRect.h += m_hoveredSizeChange;
+    m_backgroundRect.x -= m_hoveredSizeChange / 2.0f;
+    m_backgroundRect.y -= m_hoveredSizeChange / 2.0f;
+}
+
+void Button::onUnhovered()
+{
+    m_hovered = false;
+    m_backgroundRect.w -= m_hoveredSizeChange;
+    m_backgroundRect.h -= m_hoveredSizeChange;
+    m_backgroundRect.x += m_hoveredSizeChange / 2.0f;
+    m_backgroundRect.y += m_hoveredSizeChange / 2.0f;
+}
+
+void Button::onClicked()
+{
+    m_clicked = true;
+    m_backgroundRect.w -= m_clickedSizeChange;
+    m_backgroundRect.h -= m_clickedSizeChange;
+    m_backgroundRect.x += m_clickedSizeChange / 2.0f;
+    m_backgroundRect.y += m_clickedSizeChange / 2.0f;
+}
+
+void Button::onUnclicked()
+{
+    m_clicked = false;
+    m_backgroundRect.w += m_clickedSizeChange;
+    m_backgroundRect.h += m_clickedSizeChange;
+    m_backgroundRect.x -= m_clickedSizeChange / 2.0f;
+    m_backgroundRect.y -= m_clickedSizeChange / 2.0f;
 }

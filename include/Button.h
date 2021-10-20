@@ -40,8 +40,20 @@ private:
 
     void setupBackground();
     void setupText();
+    bool contains(float t_x, float t_y);
+
+    void onHovered();
+    void onUnhovered();
+    void onClicked();
+    void onUnclicked();
 
     Command * m_command;
+
+    bool m_hovered;
+    bool m_clicked;
+
+    float m_hoveredSizeChange;
+    float m_clickedSizeChange;
 
 };
 
