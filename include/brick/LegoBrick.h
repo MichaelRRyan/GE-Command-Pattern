@@ -8,7 +8,7 @@ class LegoBrick : public Brick
 {
 public:
     LegoBrick() { }
-    void render() { std::cout << "Click! - Lego Brick @" << this << std::endl; }
+    void render() { std::cout << "Click! - Lego Brick @ " << this << std::endl; }
 };
 
 #endif // !LEGO_BRICK_H

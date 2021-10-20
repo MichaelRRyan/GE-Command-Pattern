@@ -8,7 +8,7 @@ class MudBrick : public Brick
 {
 public:
     MudBrick() { }
-    void render() { std::cout << "Splat! - Mud Brick @" << this << std::endl; }
+    void render() { std::cout << "Splat! - Mud Brick @ " << this << std::endl; }
 };
 
 #endif // !MUD_BRICK_H
