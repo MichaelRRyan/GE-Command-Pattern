@@ -4,12 +4,13 @@
 #include <vector>
 #include "Command.h"
 #include "CounterButton.h"
+#include "CommandHistory.h"
 
 class AddMaterialCommand : public Command
 {
 public:
 
-    AddMaterialCommand(CounterButton * t_counterButton, std::vector<Command *> t_commandHistory);
+    AddMaterialCommand(CounterButton * t_counterButton, CommandHistory & t_commandHistory);
     virtual ~AddMaterialCommand() override;
     virtual void execute() override;
     virtual void undo() override;
@@ -17,7 +18,7 @@ public:
 private:
 
     CounterButton * m_counterButton;
-    std::vector<Command *> m_commandHistory;
+    CommandHistory & m_commandHistory;
 
 };
 

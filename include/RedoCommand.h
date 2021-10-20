@@ -1,16 +1,16 @@
-#ifndef UNDO_COMMAND_H
-#define UNDO_COMMAND_H
+#ifndef REDO_COMMAND_H
+#define REDO_COMMAND_H
 
 #include <vector>
 #include "Command.h"
 #include "CommandHistory.h"
 
-class UndoCommand : public Command
+class RedoCommand : public Command
 {
 public:
 
-    UndoCommand(CommandHistory & t_commandHistory);
-    virtual ~UndoCommand();
+    RedoCommand(CommandHistory & t_commandHistory);
+    virtual ~RedoCommand();
     virtual void execute() override;
     virtual void undo() override;
 
@@ -20,4 +20,4 @@ private:
 
 };
 
-#endif // !UNDO_COMMAND_H
+#endif // !REDO_COMMAND_H

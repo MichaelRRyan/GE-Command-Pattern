@@ -7,6 +7,8 @@
 #include "CounterButton.h"
 #include "AddMaterialCommand.h"
 #include "UndoCommand.h"
+#include "RedoCommand.h"
+#include "CommandHistory.h"
 
 const int SCREEN_WIDTH = 980;
 const int SCREEN_HEIGHT = 600;
@@ -26,6 +28,7 @@ private:
     void render();
 
     void cleanUp();
+    void setupButtonsAndCommands();
 
     bool m_isRunning;
 
@@ -38,8 +41,7 @@ private:
 	
 	SDL_Renderer* m_renderer;
 
-    std::vector<Command *> m_performedCommands;
-    std::vector<Command *> m_undoneCommands;
+    CommandHistory m_commandHistory;
 
 };
 
